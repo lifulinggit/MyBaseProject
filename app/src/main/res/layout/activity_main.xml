@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <FrameLayout
+        android:id="@+id/mFragmentCotent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </FrameLayout>
+    <baseproject.com.mybaseproject.wiget.BottomNavigationViewEx
+        android:id="@+id/mBottomView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        app:itemIconTint="@color/selector_item_primary_color"
+        app:itemTextColor="@color/selector_item_primary_color"
+        app:menu="@menu/menu_navigation_with_view_pager"></baseproject.com.mybaseproject.wiget.BottomNavigationViewEx>
+</LinearLayout>
