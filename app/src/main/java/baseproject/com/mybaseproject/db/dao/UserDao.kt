@@ -25,7 +25,7 @@ class UserDao private constructor() : BaseDao() {
      * 通过 userId 删除数据
      */
     fun deleteByUserId(userId: String) {
-        TableUtils.deleteData(TableUtils.TABLE_USER, arrayOf(userId), "userId")
+        TableUtils.deleteData(TableUtils.TABLE_USER, "userId=?", arrayOf(userId))
     }
 
     /**
@@ -58,8 +58,8 @@ class UserDao private constructor() : BaseDao() {
      * @return
      */
     fun queryByUserId(userId: String): User? {
-        val cursor = TableUtils.mQuery(TableUtils.TABLE_USER, emptyArray(),
-                "userId=?", arrayOf(userId), null.toString(), null.toString(), null.toString())
+        val cursor = TableUtils.mQuery(TableUtils.TABLE_USER, null,
+                "userId=?", arrayOf(userId), null, null, null)
         var user: User? = null
         while (cursor.moveToNext()) {
             user = parseToUser(cursor)

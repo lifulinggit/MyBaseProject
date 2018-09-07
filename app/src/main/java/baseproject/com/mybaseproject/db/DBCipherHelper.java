@@ -86,7 +86,7 @@ public class DBCipherHelper extends SQLiteOpenHelper {
      * @param db
      */
     private void createTables(SQLiteDatabase db) {
-        TableUtils.INSTANCE.createTables(db);
+        TableUtils.createTables(db);
     }
 
     /**
