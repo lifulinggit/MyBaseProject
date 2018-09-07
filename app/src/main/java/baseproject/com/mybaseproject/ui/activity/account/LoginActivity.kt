@@ -1,11 +1,11 @@
-package baseproject.com.mybaseproject.activity.account
+package baseproject.com.mybaseproject.ui.activity.account
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import baseproject.com.mybaseproject.R
-import baseproject.com.mybaseproject.activity.base.BaseMVPActivity
 import baseproject.com.mybaseproject.presenter.LoginPresenter
+import baseproject.com.mybaseproject.ui.activity.base.BaseMVPActivity
 import baseproject.com.mybaseproject.view.LoginView
 import kotlinx.android.synthetic.main.activity_login.*
 

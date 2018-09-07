@@ -1,18 +1,19 @@
-package baseproject.com.mybaseproject.activity.account
+package baseproject.com.mybaseproject.ui.activity.account
 
 import android.os.Bundle
 import android.support.v4.app.FragmentTransaction
 import baseproject.com.mybaseproject.R
-import baseproject.com.mybaseproject.activity.base.BaseMVPActivity
-import baseproject.com.mybaseproject.fragment.MusicFragment
 import baseproject.com.mybaseproject.presenter.BasePresenter
+import baseproject.com.mybaseproject.ui.activity.base.BaseMVPActivity
+import baseproject.com.mybaseproject.ui.fragment.CloudFragment
+import baseproject.com.mybaseproject.ui.fragment.MusicFragment
 import baseproject.com.mybaseproject.view.IView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseMVPActivity<IView, BasePresenter<IView>>() {
 
     private var mMusicFragment: MusicFragment? = null
-    private var mCloudFragment: MusicFragment? = null
+    private var mCloudFragment: CloudFragment? = null
     private var mFriendFragment: MusicFragment? = null
     private var mVisibleFragment: MusicFragment? = null
 
@@ -73,7 +74,7 @@ class MainActivity : BaseMVPActivity<IView, BasePresenter<IView>>() {
             //云端
             R.id.i_backup -> {
                 mCloudFragment?.let { transaction.show(it) }
-                        ?: MusicFragment.getInstance("云端")?.let {
+                        ?: CloudFragment.getInstance("云端")?.let {
                             mCloudFragment = it
                             transaction.add(R.id.mFragmentCotent, it, "CLOUD")
                         }

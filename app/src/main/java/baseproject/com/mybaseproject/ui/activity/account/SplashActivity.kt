@@ -1,9 +1,9 @@
-package baseproject.com.mybaseproject.activity.account
+package baseproject.com.mybaseproject.ui.activity.account
 
 import android.content.Intent
 import android.os.Bundle
 import baseproject.com.mybaseproject.R
-import baseproject.com.mybaseproject.activity.base.BaseMVPActivity
+import baseproject.com.mybaseproject.ui.activity.base.BaseMVPActivity
 import baseproject.com.mybaseproject.presenter.BasePresenter
 import baseproject.com.mybaseproject.view.IView
 import io.reactivex.Observable

@@ -49,4 +49,10 @@ dependencies {
     implementation 'com.orhanobut:logger:2.1.1'
     // 支持库
     implementation 'com.android.support:design:27+'
+    //BaseRecyclerViewAdapterHelper
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:v1.9.7'
+    //imagePicker
+    implementation 'com.lzy.widget:imagepicker:0.6.1'  //指定版本
+    //本地数据库加密
+    implementation 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
 }

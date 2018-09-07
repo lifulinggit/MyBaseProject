@@ -1,4 +1,4 @@
-package baseproject.com.mybaseproject.fragment
+package baseproject.com.mybaseproject.ui.fragment
 
 import android.os.Bundle
 import android.view.View

@@ -1,4 +1,4 @@
-package baseproject.com.mybaseproject.activity.base
+package baseproject.com.mybaseproject.ui.activity.base
 
 import android.app.Application
 import com.orhanobut.logger.AndroidLogAdapter

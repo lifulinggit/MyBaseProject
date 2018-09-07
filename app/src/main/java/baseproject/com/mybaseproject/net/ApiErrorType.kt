@@ -17,7 +17,7 @@ package baseproject.com.mybaseproject.net
 
 import android.support.annotation.StringRes
 import baseproject.com.mybaseproject.R
-import baseproject.com.mybaseproject.activity.base.BaseApplication
+import baseproject.com.mybaseproject.ui.activity.base.BaseApplication
 
 enum class ApiErrorType(val code: Int, @param: StringRes private val messageId: Int) {
     INTERNAL_SERVER_ERROR(500, R.string.service_error),
