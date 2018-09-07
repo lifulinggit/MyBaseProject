@@ -1,7 +1,9 @@
 package baseproject.com.mybaseproject.db;
 
 import android.content.Context;
+import android.util.Log;
 
+import net.sqlcipher.Cursor;
 import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteOpenHelper;
 
@@ -10,6 +12,7 @@ import baseproject.com.mybaseproject.ui.activity.base.BaseApplication;
 
 
 public class DBCipherHelper extends SQLiteOpenHelper {
+    public static String TAG = "DBCipherHelper";
     //数据库名称
     public static String DB_NAME = "base.db";
     //数据库版本
@@ -60,12 +63,14 @@ public class DBCipherHelper extends SQLiteOpenHelper {
         updateTables(db , oldVersion , newVersion);
     }
 
+    public SQLiteDatabase mDataBase;
     /**
      * 获取加密后的写数据库对象
      * @return
      */
     public SQLiteDatabase getWritableDatabase(){
-        return getWritableDatabase(DB_PASSWORD);
+        this.mDataBase = getWritableDatabase(DB_PASSWORD);
+        return mDataBase;
     }
 
     /**
@@ -73,14 +78,15 @@ public class DBCipherHelper extends SQLiteOpenHelper {
      * @return
      */
     public SQLiteDatabase getReadableDatabase(){
-        return getReadableDatabase(DB_PASSWORD);
+        this.mDataBase = getReadableDatabase(DB_PASSWORD);
+        return mDataBase;
     }
     /**
      * 数据库创建
      * @param db
      */
     private void createTables(SQLiteDatabase db) {
-        TableUtils.createTables(db);
+        TableUtils.INSTANCE.createTables(db);
     }
 
     /**
@@ -92,5 +98,26 @@ public class DBCipherHelper extends SQLiteOpenHelper {
     private void updateTables(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
+    /**
+     * 关闭数据库
+     * 关闭所有
+     * @param cursor
+     */
+    public void colseAll(Cursor cursor) {
+        if (cursor != null && !cursor.isClosed()) {
+            cursor.close();
+        } else {
+            Log.e(TAG, "closeAll: mCursor已关闭");
+        }
+        if (mDataBase != null && mDataBase.isOpen()) {
+            if(mDataBase.inTransaction()){
+                //如果开启了事物
+                mDataBase.endTransaction();
+            }
+            mDataBase.close();
+        } else {
+            Log.e(TAG, "closeAll: mSQLiteDatabase已关闭");
+        }
+    }
 
 }
