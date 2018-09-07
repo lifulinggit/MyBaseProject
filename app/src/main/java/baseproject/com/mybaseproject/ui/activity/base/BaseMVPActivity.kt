@@ -9,6 +9,7 @@ import android.widget.Toast
 import baseproject.com.mybaseproject.R
 import baseproject.com.mybaseproject.presenter.BasePresenter
 import baseproject.com.mybaseproject.view.IView
+import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import kotlinx.android.synthetic.main.toolbar_base.view.*
@@ -18,11 +19,13 @@ import kotlinx.android.synthetic.main.toolbar_base.view.*
     open lateinit var mPregress : ProgressDialog
      open var mActivity : AppCompatActivity? = null
      open var mPresenter : P? = null
+     open lateinit var rxPermissions : RxPermissions
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
         mActivity = this
+        rxPermissions = RxPermissions(this)
         mPregress = ProgressDialog(this)
         mPresenter = getPresenter()
         //关联代理
