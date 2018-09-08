@@ -1,45 +1,41 @@
 package baseproject.com.mybaseproject.ui.activity.account
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import baseproject.com.mybaseproject.R
-import baseproject.com.mybaseproject.presenter.LoginPresenter
-import baseproject.com.mybaseproject.ui.activity.base.BaseMVPActivity
-import baseproject.com.mybaseproject.view.LoginView
+import baseproject.com.mybaseproject.ui.base.BaseMvpActivity
+import baseproject.com.mybaseproject.mvp.contract.LoginContract
+import baseproject.com.mybaseproject.mvp.presenter.LoginPresenterImpl
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : BaseMVPActivity<LoginView , LoginPresenter>() , LoginView{
+
+/**
+ * Created by wm on 2018/9/8.
+ *
+ * 文件描述：
+ *
+ * 修改原因：
+ *
+ */
+class LoginActivity : BaseMvpActivity<LoginContract.LoginView, LoginPresenterImpl>(),LoginContract.LoginView{
+
+    override var mPresenter = LoginPresenterImpl()
 
 
-    override fun initView(savedInstanceState: Bundle?) {
-        btnLogin.setOnClickListener(View.OnClickListener {
-            mPresenter?.login()
-        })
-    }
-    override fun getLayoutId(): Int? {
+
+    override fun getLayoutId(): Int {
         return R.layout.activity_login
     }
 
-    override fun getPresenter(): LoginPresenter {
-        return LoginPresenter(this)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        btnLogin.setOnClickListener { mPresenter.login() }
     }
-    override fun getUserName(): String {
-       return mEtUserName.text.toString().trim()
-    }
-
-    override fun getPassWord(): String {
-        return mEtPassword.text.toString().trim()
-    }
-
-    override fun loginSuccess(msg: String) {
+    override fun loginSucess(msg: String) {
         showToast(msg)
-        var intent : Intent = Intent()
-        intent.setClass(this , MainActivity::class.java)
-        startActivity(intent)
     }
 
-    override fun loginFailed(msg: String) {
+    override fun loginFailed(errorMsg: String) {
+        showToast(errorMsg)
     }
 
 }

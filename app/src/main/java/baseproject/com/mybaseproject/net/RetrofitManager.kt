@@ -1,6 +1,6 @@
 package baseproject.com.mybaseproject.net
 
-import baseproject.com.mybaseproject.ui.activity.base.BaseApplication
+import baseproject.com.mybaseproject.app.BaseApplication
 import com.hazz.kotlinmvp.api.ApiService
 import com.hazz.kotlinmvp.api.UrlConstant
 import okhttp3.Cache

@@ -2,7 +2,7 @@ package baseproject.com.mybaseproject.utils
 
 import android.widget.Toast
 
-import baseproject.com.mybaseproject.ui.activity.base.BaseApplication
+import baseproject.com.mybaseproject.app.BaseApplication
 
 object ToastUtils {
 

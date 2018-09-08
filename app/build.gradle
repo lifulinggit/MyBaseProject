@@ -59,4 +59,7 @@ dependencies {
     implementation 'net.zetetic:android-database-sqlcipher:3.5.7@aar'
     //运行时权限
     implementation 'com.github.tbruyelle:rxpermissions:0.10.2'
+    // 如果使用的是java 8要显示声明如下的
+    def lifecycle_version = "1.1.1"
+    implementation "android.arch.lifecycle:common-java8:$lifecycle_version"
 }

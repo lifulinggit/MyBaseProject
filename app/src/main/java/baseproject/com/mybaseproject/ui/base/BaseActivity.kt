@@ -1,25 +1,24 @@
-package baseproject.com.mybaseproject.ui.activity.base
+package baseproject.com.mybaseproject.ui.base
 
 import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.View
-import android.widget.Toast
 import baseproject.com.mybaseproject.R
-import baseproject.com.mybaseproject.presenter.BasePresenter
-import baseproject.com.mybaseproject.view.IView
+import baseproject.com.mybaseproject.mvp.contract.IContract
+import baseproject.com.mybaseproject.utils.ToastUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import kotlinx.android.synthetic.main.toolbar_base.view.*
 
- abstract class BaseMVPActivity<V , P : BasePresenter<V>> : AppCompatActivity() , IView {
+abstract class BaseActivity : AppCompatActivity(), IContract.IBaseView{
+
 
     open lateinit var mPregress : ProgressDialog
-     open var mActivity : AppCompatActivity? = null
-     open var mPresenter : P? = null
-     open lateinit var rxPermissions : RxPermissions
+    open var mActivity : AppCompatActivity? = null
+    open lateinit var rxPermissions : RxPermissions
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,26 +26,10 @@ import kotlinx.android.synthetic.main.toolbar_base.view.*
         mActivity = this
         rxPermissions = RxPermissions(this)
         mPregress = ProgressDialog(this)
-        mPresenter = getPresenter()
-        //关联代理
-        if (mPresenter != null){
-            mPresenter!!.attachView(this as V)
-        }
-        initToolBar()
 
-        initData()
-        initView(savedInstanceState)
+        initToolBar()
     }
 
-     /**
-      * 初始化数据
-      */
-     open fun initData(){}
-
-     /**
-      * 初始化视图
-      */
-     abstract fun initView(savedInstanceState: Bundle?)
 
     open fun initToolBar() {
         setSupportActionBar(mToolBar)
@@ -56,10 +39,10 @@ import kotlinx.android.synthetic.main.toolbar_base.view.*
         mBtnBack.setOnClickListener { finish() }
     }
 
-     /**
-      * 获取子布局
-      */
-     abstract fun getLayoutId(): Int?
+    /**
+     * 获取子布局
+     */
+    abstract fun getLayoutId(): Int?
 
     /**
      * 设置新的Toolbar
@@ -67,19 +50,19 @@ import kotlinx.android.synthetic.main.toolbar_base.view.*
     open fun setToolBar(toolBar : Toolbar){
         setSupportActionBar(mToolBar)
     }
-     /**
-      * 隐藏ToolBar
-      */
-     open fun hideToolBar(){
-         mToolBar.visibility = View.GONE
-     }
+    /**
+     * 隐藏ToolBar
+     */
+    open fun hideToolBar(){
+        mToolBar.visibility = View.GONE
+    }
 
     /**
      * 设置标题
      */
-     open fun setTitle(title : String){
-         mToolBar.mTvTtile.text = title
-     }
+    open fun setTitle(title : String){
+        mToolBar.mTvTtile.text = title
+    }
 
     /**
      * 返回按钮设置点击事件
@@ -101,28 +84,23 @@ import kotlinx.android.synthetic.main.toolbar_base.view.*
         mBtnCommite.text = text
     }
 
-     override fun showToast(msg: String) {
-//             ToastUtils.showToast(msg)
-         Toast.makeText(this , msg , Toast.LENGTH_SHORT).show()
-     }
-     /**
-      * 显示加载条
-      */
-     override fun showProgress(msg: String) {
-         mPregress.show()
-     }
+    override fun showToast(msg: String) {
+        ToastUtils.showToast(msg)
+    }
+    /**
+     * 显示加载条
+     */
+    override fun showProgress(msg: String) {
+        mPregress.show()
+    }
 
-     /**
-      * 隐藏加载条
-      */
-     override fun hideProgress() {
-         if (mPregress.isShowing){
-             mPregress.dismiss()
-         }
-     }
-     /**
-      * 获取代理
-      */
-     abstract fun getPresenter(): P
+    /**
+     * 隐藏加载条
+     */
+    override fun hideProgress() {
+        if (mPregress.isShowing){
+            mPregress.dismiss()
+        }
+    }
 
- }
+}

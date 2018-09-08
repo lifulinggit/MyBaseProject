@@ -3,11 +3,11 @@ package baseproject.com.mybaseproject.ui.fragment
 import android.os.Bundle
 import android.view.View
 import baseproject.com.mybaseproject.R
-import baseproject.com.mybaseproject.presenter.BasePresenter
+import baseproject.com.mybaseproject.ui.base.BaseFragment
 import baseproject.com.mybaseproject.view.IView
 import kotlinx.android.synthetic.main.fragment_music.*
 
-class MusicFragment : BaseMvpFragment<BasePresenter<IView>>() {
+class MusicFragment : BaseFragment() {
     private var mTitle: String? = null
 
     companion object {
@@ -24,13 +24,13 @@ class MusicFragment : BaseMvpFragment<BasePresenter<IView>>() {
         return R.layout.fragment_music
     }
 
-    override fun initView(savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
+    fun initView() {
         tvTitile.text = mTitle
         mTitle?.let { setTitle(it) }
         setBtnCommiteVisible(View.GONE , "")
-    }
-
-    override fun getPresenter(): BasePresenter<IView>? {
-        return BasePresenter()
     }
 }

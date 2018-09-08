@@ -27,7 +27,7 @@
     <uses-permission android:name="android.permission.CALL_PHONE"/>
 
     <application
-        android:name="baseproject.com.mybaseproject.ui.activity.base.BaseApplication"
+        android:name="baseproject.com.mybaseproject.app.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -41,9 +41,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="baseproject.com.mybaseproject.ui.activity.account.LoginActivity" />
-        <activity android:name="baseproject.com.mybaseproject.ui.activity.account.MainActivity" />
-        <activity android:name="baseproject.com.mybaseproject.ui.activity.account.WebViewActivity" />
+        <activity android:name=".ui.activity.account.MainActivity" />
+        <activity android:name=".ui.activity.account.LoginActivity" />
     </application>
 
 </manifest>

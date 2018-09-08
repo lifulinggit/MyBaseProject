@@ -1,4 +1,4 @@
-package baseproject.com.mybaseproject.ui.fragment
+package baseproject.com.mybaseproject.ui.base
 
 import android.app.ProgressDialog
 import android.os.Bundle
@@ -8,17 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import baseproject.com.mybaseproject.R
-import baseproject.com.mybaseproject.presenter.BasePresenter
-import baseproject.com.mybaseproject.view.IView
+import baseproject.com.mybaseproject.mvp.contract.IContract
+import baseproject.com.mybaseproject.utils.ToastUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.fragment_base.*
 import kotlinx.android.synthetic.main.toolbar_base.*
 import kotlinx.android.synthetic.main.toolbar_base.view.*
 
-abstract class BaseMvpFragment<P : BasePresenter<IView>> : Fragment(), IView {
+abstract class BaseFragment : Fragment(), IContract.IBaseView {
 
-    open lateinit var mPregress: ProgressDialog
-    var mPresenter: BasePresenter<IView>? = null
+     open lateinit var mPregress: ProgressDialog
     open lateinit var rxPermissions: RxPermissions
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -30,13 +29,6 @@ abstract class BaseMvpFragment<P : BasePresenter<IView>> : Fragment(), IView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initToolBar()
-        mPresenter = getPresenter()
-        //关联代理
-        if (mPresenter != null) {
-            mPresenter!!.attachView(this)
-        }
-        initData()
-        initView(savedInstanceState)
     }
 
 
@@ -75,6 +67,10 @@ abstract class BaseMvpFragment<P : BasePresenter<IView>> : Fragment(), IView {
         mBtnCommite.text = text
     }
 
+    override fun showToast(msg: String) {
+        ToastUtils.showToast(msg)
+    }
+
     /**
      * 显示加载条
      */
@@ -91,31 +87,9 @@ abstract class BaseMvpFragment<P : BasePresenter<IView>> : Fragment(), IView {
         }
     }
 
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        if (mPresenter != null) {
-            mPresenter?.detachView()
-        }
-    }
-
     /**
      * 获取子布局
      */
     abstract fun getLayoutId(): Int?
 
-    /**
-     * 初始化界面
-     */
-    abstract fun initView(savedInstanceState: Bundle?)
-
-    /**
-     * 初始化数据
-     */
-    open fun initData() {}
-
-    /**
-     * 获取代理
-     */
-    abstract fun getPresenter(): P?
 }

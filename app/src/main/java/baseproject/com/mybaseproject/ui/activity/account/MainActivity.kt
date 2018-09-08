@@ -3,14 +3,12 @@ package baseproject.com.mybaseproject.ui.activity.account
 import android.os.Bundle
 import android.support.v4.app.FragmentTransaction
 import baseproject.com.mybaseproject.R
-import baseproject.com.mybaseproject.presenter.BasePresenter
-import baseproject.com.mybaseproject.ui.activity.base.BaseMVPActivity
+import baseproject.com.mybaseproject.ui.base.BaseActivity
 import baseproject.com.mybaseproject.ui.fragment.CloudFragment
 import baseproject.com.mybaseproject.ui.fragment.MusicFragment
-import baseproject.com.mybaseproject.view.IView
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseMVPActivity<IView, BasePresenter<IView>>() {
+class MainActivity : BaseActivity() {
 
     private var mMusicFragment: MusicFragment? = null
     private var mCloudFragment: CloudFragment? = null
@@ -21,8 +19,18 @@ class MainActivity : BaseMVPActivity<IView, BasePresenter<IView>>() {
     private var mIndex = 0
     private var currTabIndex: String = "currTabIndex"
 
+    override fun getLayoutId(): Int? {
+        return R.layout.activity_main
+    }
 
-    override fun initView(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        initView(savedInstanceState)
+    }
+
+
+    fun initView(savedInstanceState: Bundle?) {
         mIndex = savedInstanceState?.getInt(currTabIndex) ?: R.id.i_music
         //隐藏toolbar
         hideToolBar()
@@ -41,13 +49,7 @@ class MainActivity : BaseMVPActivity<IView, BasePresenter<IView>>() {
         mBottomView.selectedItemId = mIndex
     }
 
-    override fun getLayoutId(): Int? {
-        return R.layout.activity_main
-    }
 
-    override fun getPresenter(): BasePresenter<IView> {
-        return BasePresenter()
-    }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         super.onSaveInstanceState(outState)

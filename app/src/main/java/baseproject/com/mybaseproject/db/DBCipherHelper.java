@@ -8,7 +8,7 @@ import net.sqlcipher.database.SQLiteDatabase;
 import net.sqlcipher.database.SQLiteOpenHelper;
 
 import baseproject.com.mybaseproject.db.dao.UserDao;
-import baseproject.com.mybaseproject.ui.activity.base.BaseApplication;
+import baseproject.com.mybaseproject.app.BaseApplication;
 
 
 public class DBCipherHelper extends SQLiteOpenHelper {

@@ -5,13 +5,12 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import android.widget.TextView
 import baseproject.com.mybaseproject.R
-import baseproject.com.mybaseproject.presenter.BasePresenter
 import baseproject.com.mybaseproject.ui.adapter.CloudFragmentAdapter
-import baseproject.com.mybaseproject.view.IView
+import baseproject.com.mybaseproject.ui.base.BaseFragment
 import com.chad.library.adapter.base.BaseQuickAdapter
 import kotlinx.android.synthetic.main.fragment_cloud.*
 
-class CloudFragment : BaseMvpFragment<BasePresenter<IView>>() {
+class CloudFragment : BaseFragment() {
     private var mTitle: String? = null
     private lateinit var mList : ArrayList<String>
 
@@ -29,19 +28,26 @@ class CloudFragment : BaseMvpFragment<BasePresenter<IView>>() {
         return R.layout.fragment_cloud
     }
 
-    override fun initData() {
-        super.initData()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        initData()
+        initView()
+    }
+
+     fun initData() {
         mList = ArrayList<String>()
         for (i in 1..30){
             mList.add(i.toString())
         }
     }
 
-    override fun initView(savedInstanceState: Bundle?) {
+     fun initView() {
         mTitle?.let { setTitle(it) }
         setBtnCommiteVisible(View.GONE , "")
         initRecyclerView()
     }
+
     private fun initRecyclerView() {
         var layoutManager = LinearLayoutManager(activity)
         //设置为纵向排列
@@ -63,9 +69,5 @@ class CloudFragment : BaseMvpFragment<BasePresenter<IView>>() {
         mAdapter.addHeaderView(tv)
 
         mRecyclerView.adapter = mAdapter
-    }
-
-    override fun getPresenter(): BasePresenter<IView>? {
-        return BasePresenter()
     }
 }

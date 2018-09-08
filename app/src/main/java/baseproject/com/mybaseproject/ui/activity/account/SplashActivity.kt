@@ -4,19 +4,17 @@ import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import baseproject.com.mybaseproject.R
-import baseproject.com.mybaseproject.presenter.BasePresenter
-import baseproject.com.mybaseproject.ui.activity.base.BaseMVPActivity
+import baseproject.com.mybaseproject.ui.base.BaseActivity
 import baseproject.com.mybaseproject.utils.ToastUtils
-import baseproject.com.mybaseproject.view.IView
 
 
-class SplashActivity : BaseMVPActivity<IView , BasePresenter<IView>>() {
-    override fun getPresenter(): BasePresenter<IView> {
-        return BasePresenter()
+class SplashActivity : BaseActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        init()
     }
 
-    override fun initView(savedInstanceState: Bundle?) {
-
+    private fun init() {
         hideToolBar()
 
         jumpToMainActivity()
@@ -45,7 +43,9 @@ class SplashActivity : BaseMVPActivity<IView , BasePresenter<IView>>() {
                     }
                 }
 
+
     }
+
     private fun jumpToMainActivity() {
         var intent : Intent = Intent()
         intent.setClass(this , LoginActivity::class.java)
