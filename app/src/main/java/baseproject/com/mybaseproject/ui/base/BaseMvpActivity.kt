@@ -2,7 +2,6 @@ package baseproject.com.mybaseproject.ui.base
 
 import android.arch.lifecycle.LifecycleOwner
 import android.os.Bundle
-import android.widget.Toast
 import baseproject.com.mybaseproject.mvp.contract.IContract
 
 /**

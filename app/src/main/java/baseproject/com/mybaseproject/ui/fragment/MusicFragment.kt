@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import baseproject.com.mybaseproject.R
 import baseproject.com.mybaseproject.ui.base.BaseFragment
-import baseproject.com.mybaseproject.view.IView
 import kotlinx.android.synthetic.main.fragment_music.*
 
 class MusicFragment : BaseFragment() {

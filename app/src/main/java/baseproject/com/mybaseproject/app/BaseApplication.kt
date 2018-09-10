@@ -1,11 +1,11 @@
 package baseproject.com.mybaseproject.app
 
-import android.app.Application
+import android.support.multidex.MultiDexApplication
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import com.orhanobut.logger.PrettyFormatStrategy
 
-class BaseApplication : Application() {
+class BaseApplication : MultiDexApplication() {
 
     companion object {
         var instance: BaseApplication? = null

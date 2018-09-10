@@ -1,10 +1,7 @@
 package baseproject.com.mybaseproject.mvp.presenter
 
 import baseproject.com.mybaseproject.mvp.contract.IContract
-import baseproject.com.mybaseproject.net.ResultObserver
-import baseproject.com.mybaseproject.utils.scheduler.RxUtils
-import io.reactivex.CompletableObserver
-import io.reactivex.Observable
+import baseproject.com.mybaseproject.utils.LoggerUtils
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableObserver
 
@@ -17,7 +14,7 @@ import io.reactivex.observers.DisposableObserver
  *
  */
  open class BasePresenterImpl<V : IContract.IBaseView> : IContract.IBasePresenter<V> {
-
+    val TAG : String = "BasePresenterImpl"
     //用于事件源的统一管理   订阅和取消订阅
     private  var mCompositeDisposable = CompositeDisposable()
 
@@ -28,6 +25,7 @@ import io.reactivex.observers.DisposableObserver
     }
 
     override fun detachView() {
+        LoggerUtils.showiLogger(TAG , "detachView")
         if (mCompositeDisposable != null){
             mCompositeDisposable.clear()
         }
