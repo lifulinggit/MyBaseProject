@@ -7,12 +7,15 @@ import android.widget.TextView
 import baseproject.com.mybaseproject.R
 import baseproject.com.mybaseproject.ui.adapter.CloudFragmentAdapter
 import baseproject.com.mybaseproject.ui.base.BaseFragment
+import baseproject.com.mybaseproject.utils.ToastUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import kotlinx.android.synthetic.main.fragment_cloud.*
+
 
 class CloudFragment : BaseFragment() {
     private var mTitle: String? = null
     private lateinit var mList : ArrayList<String>
+    private var mAdapter : CloudFragmentAdapter? = null
 
     companion object {
         fun getInstance(title : String) : CloudFragment{
@@ -37,7 +40,7 @@ class CloudFragment : BaseFragment() {
 
      fun initData() {
         mList = ArrayList<String>()
-        for (i in 1..30){
+        for (i in 1..15){
             mList.add(i.toString())
         }
     }
@@ -54,20 +57,31 @@ class CloudFragment : BaseFragment() {
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         mRecyclerView.layoutManager = layoutManager
         //初始化adapter
-        var mAdapter = CloudFragmentAdapter(R.layout.item_cloud , mList)
-        //条目的点击事件
-        mAdapter.setOnRecyclerViewItemClickListener(BaseQuickAdapter.OnRecyclerViewItemClickListener { view, i ->
-            showToast(mList.get(i))
-        })
-        //加载更多
-        mAdapter.setOnLoadMoreListener{
-            showToast("加载更多")
-        }
+        mAdapter = CloudFragmentAdapter(R.layout.item_cloud , mList)
+
         //添加头布局
         var tv = TextView(activity)
         tv.text = "这是头布局"
-        mAdapter.addHeaderView(tv)
+        mAdapter?.addHeaderView(tv)
 
         mRecyclerView.adapter = mAdapter
+
+        //加载更多
+        mAdapter?.setOnLoadMoreListener(BaseQuickAdapter.RequestLoadMoreListener {
+            loadMore()
+        } , mRecyclerView)
+
+
+        //条目的点击事件
+        mAdapter?.setOnItemClickListener { adapter, view, position ->  showToast(mList.get(position)) }
+    }
+
+    /**
+     * 加载更多
+     */
+    private fun loadMore() {
+        ToastUtils.showToast("加载更多")
+//        mAdapter?.setEnableLoadMore(false)
+        mAdapter?.loadMoreFail()
     }
 }
