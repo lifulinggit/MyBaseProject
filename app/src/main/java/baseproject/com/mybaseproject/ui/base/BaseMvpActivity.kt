@@ -15,7 +15,7 @@ import baseproject.com.mybaseproject.mvp.contract.IContract
 abstract class BaseMvpActivity<V : IContract.IBaseView , P : IContract.IBasePresenter<V>>
     : BaseActivity(), LifecycleOwner {
 
-    abstract open  var mPresenter : P
+    abstract var mPresenter : P
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

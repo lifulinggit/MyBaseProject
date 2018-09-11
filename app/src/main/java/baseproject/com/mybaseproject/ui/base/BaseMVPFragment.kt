@@ -16,7 +16,7 @@ import baseproject.com.mybaseproject.mvp.contract.IContract
 abstract class BaseMVPFragment<V : IContract.IBaseView , P : IContract.IBasePresenter<V>>
     : BaseFragment(), LifecycleOwner {
 
-    abstract open  var mPresenter : P
+    abstract var mPresenter : P
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

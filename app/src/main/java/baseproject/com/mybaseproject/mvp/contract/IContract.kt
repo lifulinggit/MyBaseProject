@@ -32,32 +32,38 @@ interface IContract {
      */
     interface IBasePresenter<V> : DefaultLifecycleObserver {
 
+        private val TAG: String
+            get() = "IBasePresenter"
+
+        /**
+         * 绑定视图
+         */
         fun attachView(view: V)
+
         override fun onCreate(owner: LifecycleOwner) {
-            LoggerUtils.showiLogger("IBasePresenter" , "onCreate")
+            LoggerUtils.showILogger(TAG , "onCreate")
         }
 
-
         override fun onResume(owner: LifecycleOwner) {
-            LoggerUtils.showiLogger("IBasePresenter" , "onResume")
+            LoggerUtils.showILogger(TAG , "onResume")
         }
 
         override fun onPause(owner: LifecycleOwner) {
-            LoggerUtils.showiLogger("IBasePresenter" , "onResume")
+            LoggerUtils.showILogger(TAG , "onResume")
         }
 
         override fun onStop(owner: LifecycleOwner) {
-            LoggerUtils.showiLogger("IBasePresenter" , "onStop")
+            LoggerUtils.showILogger(TAG , "onStop")
         }
         override fun onDestroy(owner: LifecycleOwner) {
-            LoggerUtils.showiLogger("IBasePresenter" , "onDestroy")
+            LoggerUtils.showILogger(TAG , "onDestroy")
+            //释放视图的引用
             detachView()
         }
 
         /**
          * 在视图销毁时 释放引用
          */
-//        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
         fun detachView()
     }
 

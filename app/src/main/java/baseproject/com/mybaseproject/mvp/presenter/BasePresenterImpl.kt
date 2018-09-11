@@ -16,7 +16,8 @@ import io.reactivex.observers.DisposableObserver
  open class BasePresenterImpl<V : IContract.IBaseView> : IContract.IBasePresenter<V> {
     val TAG : String = "BasePresenterImpl"
     //用于事件源的统一管理   订阅和取消订阅
-    private  var mCompositeDisposable = CompositeDisposable()
+    private var mCompositeDisposable: CompositeDisposable? = CompositeDisposable()
+
 
     protected var mView: V? = null
 
@@ -25,9 +26,9 @@ import io.reactivex.observers.DisposableObserver
     }
 
     override fun detachView() {
-        LoggerUtils.showiLogger(TAG , "detachView")
+        LoggerUtils.showILogger(TAG , "detachView")
         if (mCompositeDisposable != null){
-            mCompositeDisposable.clear()
+            mCompositeDisposable?.clear()
         }
         mView = null
     }
@@ -53,13 +54,13 @@ import io.reactivex.observers.DisposableObserver
         if (mCompositeDisposable == null){
             mCompositeDisposable = CompositeDisposable()
         }
-        mCompositeDisposable.add(disposableObserver)
+        mCompositeDisposable?.add(disposableObserver)
     }
 
     open fun <T> cancelDisposable(disposableObserver: DisposableObserver<T>){
         if (mCompositeDisposable == null){
             return
         }
-        mCompositeDisposable.remove(disposableObserver)
+        mCompositeDisposable?.remove(disposableObserver)
     }
 }

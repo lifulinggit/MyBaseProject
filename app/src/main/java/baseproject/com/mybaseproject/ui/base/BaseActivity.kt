@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar
 import android.view.View
 import baseproject.com.mybaseproject.R
 import baseproject.com.mybaseproject.mvp.contract.IContract
+import baseproject.com.mybaseproject.utils.ActivityUtils
 import baseproject.com.mybaseproject.utils.ToastUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_base.*
@@ -24,6 +25,9 @@ abstract class BaseActivity : AppCompatActivity(), IContract.IBaseView{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
         mActivity = this
+        //入栈
+        ActivityUtils.pushActivity(this)
+
         rxPermissions = RxPermissions(this)
         mPregress = ProgressDialog(this)
 
@@ -103,4 +107,9 @@ abstract class BaseActivity : AppCompatActivity(), IContract.IBaseView{
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        //出栈
+        ActivityUtils.removeActivity(this)
+    }
 }

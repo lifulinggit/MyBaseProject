@@ -2,9 +2,10 @@ package baseproject.com.mybaseproject.ui.activity.account
 
 import android.os.Bundle
 import baseproject.com.mybaseproject.R
-import baseproject.com.mybaseproject.ui.base.BaseMvpActivity
 import baseproject.com.mybaseproject.mvp.contract.LoginContract
 import baseproject.com.mybaseproject.mvp.presenter.LoginPresenterImpl
+import baseproject.com.mybaseproject.ui.base.BaseMvpActivity
+import baseproject.com.mybaseproject.utils.ActivityUtils
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -20,8 +21,6 @@ class LoginActivity : BaseMvpActivity<LoginContract.LoginView, LoginPresenterImp
 
     override var mPresenter = LoginPresenterImpl()
 
-
-
     override fun getLayoutId(): Int {
         return R.layout.activity_login
     }
@@ -32,6 +31,8 @@ class LoginActivity : BaseMvpActivity<LoginContract.LoginView, LoginPresenterImp
     }
     override fun loginSucess(msg: String) {
         showToast(msg)
+        //跳转到MainActivity
+        ActivityUtils.startActivityAndFinish(this , MainActivity::class.java)
     }
 
     override fun loginFailed(errorMsg: String) {
