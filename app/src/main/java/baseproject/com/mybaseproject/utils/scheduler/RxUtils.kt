@@ -10,4 +10,11 @@ object RxUtils {
             observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
         }
     }
+    fun <T> downloadFile(): ObservableTransformer<T, T> {
+        return ObservableTransformer { observable ->
+            observable.subscribeOn(Schedulers.io())
+                    .observeOn(Schedulers.io())
+                    .observeOn(Schedulers.computation())
+        }
+    }
 }

@@ -3,9 +3,9 @@ package com.hazz.kotlinmvp.api
 import baseproject.com.mybaseproject.model.bean.User
 import baseproject.com.mybaseproject.net.BaseResponse
 import io.reactivex.Observable
-import io.reactivex.functions.Consumer
-import retrofit2.http.POST
-import retrofit2.http.QueryMap
+import okhttp3.MultipartBody
+import okhttp3.ResponseBody
+import retrofit2.http.*
 
 
 /**
@@ -20,10 +20,23 @@ interface ApiService{
      */
     @POST("/user/login")
     fun login(@QueryMap map :  Map<String,String>): Observable<BaseResponse<User>>
-
-    fun me(){
-        Observable.just("").subscribe(Consumer {  })
-    }
-
+    /**
+     * 单文件上传
+     */
+    @POST("file/upload")
+    @Multipart
+    fun uploadFile(@Part parts : MultipartBody.Part, @QueryMap map :  Map<String,String>): Observable<BaseResponse<String>>
+    /**
+     * 多文件上传
+     */
+    @POST("file/upload")
+    @Multipart
+    fun uploadMutFiles(@Part parts: Array<MultipartBody.Part?>, @QueryMap map:  Map<String,String> ): Observable<BaseResponse<String>>
+    /**
+     * 文件下载
+     */
+    @Streaming
+    @GET
+    fun downloadFile(@Url fileUrl : String): Observable<ResponseBody>
 
 }

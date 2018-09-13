@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_login.*
  * 修改原因：
  *
  */
-class LoginActivity : BaseMvpActivity<LoginContract.LoginView, LoginPresenterImpl>(),LoginContract.LoginView{
+class LoginActivity : BaseMvpActivity<LoginContract.LoginView, LoginPresenterImpl>(), LoginContract.LoginView {
 
     override var mPresenter = LoginPresenterImpl()
 
@@ -27,12 +27,33 @@ class LoginActivity : BaseMvpActivity<LoginContract.LoginView, LoginPresenterImp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        btnLogin.setOnClickListener { mPresenter.login() }
+        btnLogin.setOnClickListener {
+            //文件下载
+            //判断权限
+//            rxPermissions.requestEach(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+//                    .subscribe { permission ->
+//                        if (permission.granted) {
+//                            //同意了
+//                            ToastUtils.showToast("同意")
+//                            mPresenter.download()
+//                        } else if (permission.shouldShowRequestPermissionRationale) {
+//                            //拒绝
+//                            ToastUtils.showToast("拒绝")
+//                        } else {
+//                            //拒绝&不在询问
+//                            ToastUtils.showToast("拒绝不在询问")
+//                        }
+//                    }
+            //登录接口
+            mPresenter.login()
+
+        }
     }
+
     override fun loginSucess(msg: String) {
         showToast(msg)
         //跳转到MainActivity
-        ActivityUtils.startActivityAndFinish(this , MainActivity::class.java)
+        ActivityUtils.startActivityAndFinish(this, MainActivity::class.java)
     }
 
     override fun loginFailed(errorMsg: String) {
