@@ -9,6 +9,7 @@ import baseproject.com.mybaseproject.R
 import baseproject.com.mybaseproject.mvp.contract.IContract
 import baseproject.com.mybaseproject.utils.ActivityUtils
 import baseproject.com.mybaseproject.utils.ToastUtils
+import com.noober.background.BackgroundLibrary
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.toolbar_base.*
@@ -22,6 +23,8 @@ abstract class BaseActivity : AppCompatActivity(), IContract.IBaseView{
     open lateinit var rxPermissions : RxPermissions
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //动态生成shape
+        BackgroundLibrary.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_base)
         mActivity = this
