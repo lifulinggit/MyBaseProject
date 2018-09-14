@@ -18,6 +18,8 @@ interface ApiService{
     /**
      * 登录
      */
+
+    @Headers("url_name:user")
     @POST("/user/login")
     fun login(@QueryMap map :  Map<String,String>): Observable<BaseResponse<User>>
     /**
