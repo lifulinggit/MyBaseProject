@@ -3,6 +3,7 @@ package baseproject.com.mybaseproject.utils
 import android.content.Context
 import android.widget.ImageView
 import baseproject.com.mybaseproject.R
+import baseproject.com.mybaseproject.app.BaseApplication
 import baseproject.com.mybaseproject.utils.glide.GlideApp
 import com.bumptech.glide.Priority
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -47,4 +48,10 @@ object ImageUtils {
     }
 
 
+    /**
+     * 清理缓存
+     */
+    fun clearDiskCache(){
+        GlideApp.get(BaseApplication.getInstance()).clearDiskCache()
+    }
 }

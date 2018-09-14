@@ -5,6 +5,7 @@ import android.support.v4.app.FragmentTransaction
 import baseproject.com.mybaseproject.R
 import baseproject.com.mybaseproject.ui.base.BaseActivity
 import baseproject.com.mybaseproject.ui.fragment.CloudFragment
+import baseproject.com.mybaseproject.ui.fragment.MeFragment
 import baseproject.com.mybaseproject.ui.fragment.MusicFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -13,7 +14,7 @@ class MainActivity : BaseActivity() {
     private var mMusicFragment: MusicFragment? = null
     private var mCloudFragment: CloudFragment? = null
     private var mFriendFragment: MusicFragment? = null
-    private var mVisibleFragment: MusicFragment? = null
+    private var mMeFragment: MeFragment? = null
 
     //默认为0
     private var mIndex = 0
@@ -89,11 +90,11 @@ class MainActivity : BaseActivity() {
                             transaction.add(R.id.mFragmentCotent, it, "FRIEND")
                         }
             }
-            //发现
+            //我的
             R.id.i_visibility -> {
-                mVisibleFragment?.let { transaction.show(it) }
-                        ?: MusicFragment.getInstance("发现")?.let {
-                            mVisibleFragment = it
+                mMeFragment?.let { transaction.show(it) }
+                        ?: MeFragment.getInstance("我的")?.let {
+                            mMeFragment = it
                             transaction.add(R.id.mFragmentCotent, it, "VISIBLE")
                         }
             }
@@ -111,6 +112,6 @@ class MainActivity : BaseActivity() {
         mMusicFragment?.let { transaction.hide(it) }
         mCloudFragment?.let { transaction.hide(it) }
         mFriendFragment?.let { transaction.hide(it) }
-        mVisibleFragment?.let { transaction.hide(it) }
+        mMeFragment?.let { transaction.hide(it) }
     }
 }

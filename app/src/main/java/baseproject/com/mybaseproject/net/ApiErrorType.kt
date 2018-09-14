@@ -30,6 +30,6 @@ enum class ApiErrorType(val code: Int, @param: StringRes private val messageId: 
     private val DEFAULT_CODE = 1
 
     fun getApiErrorModel(): ApiErrorModel {
-        return ApiErrorModel(DEFAULT_CODE, BaseApplication.instance!!.getString(messageId))
+        return ApiErrorModel(DEFAULT_CODE, BaseApplication.getInstance().getString(messageId))
     }
 }
