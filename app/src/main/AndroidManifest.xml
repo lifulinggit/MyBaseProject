@@ -44,6 +44,7 @@
         <activity android:name=".ui.activity.account.MainActivity" />
         <activity android:name=".ui.activity.account.LoginActivity" />
         <activity android:name="com.lzy.imagepicker.ui.ImageGridActivity"></activity>
+        <activity android:name=".ui.activity.account.TestAct" />
     </application>
 
 </manifest>

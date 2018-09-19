@@ -2,11 +2,13 @@ package baseproject.com.mybaseproject.ui.activity.account
 
 import android.os.Bundle
 import android.support.v4.app.FragmentTransaction
+import android.support.v7.app.ActionBarDrawerToggle
 import baseproject.com.mybaseproject.R
 import baseproject.com.mybaseproject.ui.base.BaseActivity
 import baseproject.com.mybaseproject.ui.fragment.CloudFragment
 import baseproject.com.mybaseproject.ui.fragment.MeFragment
 import baseproject.com.mybaseproject.ui.fragment.MusicFragment
+import kotlinx.android.synthetic.main.activity_base.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -35,6 +37,14 @@ class MainActivity : BaseActivity() {
         mIndex = savedInstanceState?.getInt(currTabIndex) ?: R.id.i_music
         //隐藏toolbar
         hideToolBar()
+
+        val mToggle = ActionBarDrawerToggle(this, drawerLayout, mToolBar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close)
+        mToggle.syncState()
+        drawerLayout.addDrawerListener(mToggle)
+        navigationView.itemIconTintList = null
+
         //文字大小动画
 //        mBottomView.enableAnimation(false)
         //左右移动动画
@@ -49,7 +59,6 @@ class MainActivity : BaseActivity() {
         }
         mBottomView.selectedItemId = mIndex
     }
-
 
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -98,7 +107,8 @@ class MainActivity : BaseActivity() {
                             transaction.add(R.id.mFragmentCotent, it, "VISIBLE")
                         }
             }
-            else ->{}
+            else -> {
+            }
         }
         mIndex = index
         transaction.commitAllowingStateLoss()
