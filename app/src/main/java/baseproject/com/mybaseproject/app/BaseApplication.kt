@@ -52,8 +52,8 @@ class BaseApplication : MultiDexApplication() {
         imagePicker.isCrop = true //允许裁剪  （单选才有效）
         imagePicker.isSaveRectangle = true //是否按照矩形区域保存
         imagePicker.selectLimit = 3 //选中数量限制
-        imagePicker.isMultiMode = false //多选
-        imagePicker.style = CropImageView.Style.CIRCLE //裁剪框的形状
+        imagePicker.isMultiMode = true //多选
+        imagePicker.style = CropImageView.Style.RECTANGLE //裁剪框的形状
         imagePicker.focusHeight = 800  //裁剪框的高度
         imagePicker.focusWidth = 800  //裁剪框的宽度
         imagePicker.outPutX = 1000 //保存文件的宽度

@@ -13,7 +13,7 @@ class CloudFragmentAdapter : BaseQuickAdapter<String, BaseViewHolder> {
 
     override fun convert(baseViewHolder: BaseViewHolder, s: String) {
         baseViewHolder.setText(R.id.tvContent, s)
-        ImageUtils.loadRound(BaseApplication.Companion.instance!!
+        ImageUtils.loadRound(BaseApplication.getInstance()
                 , baseViewHolder.getView<ImageView>(R.id.mImageView)
                 , "http://t2.hddhhn.com/uploads/tu/201809/9999/c42eafc576.jpg")
     }
