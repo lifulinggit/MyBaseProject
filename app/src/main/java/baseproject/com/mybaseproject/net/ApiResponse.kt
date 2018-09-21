@@ -38,7 +38,6 @@ abstract class ApiResponse<T> : Observer<T>{
     }
 
     override fun onComplete() {
-        LoadingDialog.cancel()
     }
 
     override fun onError(e: Throwable) {

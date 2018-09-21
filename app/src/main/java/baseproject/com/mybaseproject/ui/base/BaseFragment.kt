@@ -1,6 +1,5 @@
 package baseproject.com.mybaseproject.ui.base
 
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
@@ -9,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import baseproject.com.mybaseproject.R
 import baseproject.com.mybaseproject.mvp.contract.IContract
+import baseproject.com.mybaseproject.utils.ProgressDialogUtil
 import baseproject.com.mybaseproject.utils.ToastUtils
 import com.tbruyelle.rxpermissions2.RxPermissions
 import kotlinx.android.synthetic.main.fragment_base.*
@@ -17,12 +17,10 @@ import kotlinx.android.synthetic.main.toolbar_base.view.*
 
 abstract class BaseFragment : Fragment(), IContract.IBaseView {
 
-     open lateinit var mPregress: ProgressDialog
     open lateinit var rxPermissions: RxPermissions
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rxPermissions = RxPermissions(this)
-        mPregress = ProgressDialog(activity)
         return inflater.inflate(R.layout.fragment_base, null)
     }
 
@@ -47,8 +45,9 @@ abstract class BaseFragment : Fragment(), IContract.IBaseView {
      * 设置标题
      */
     open fun setTitle(title: String) {
-        if (title == null)
+        if (title == null) {
             return
+        }
         mfragmentToolBar.mTvTtile.text = title
     }
 
@@ -75,16 +74,14 @@ abstract class BaseFragment : Fragment(), IContract.IBaseView {
      * 显示加载条
      */
     override fun showProgress(msg: String) {
-        mPregress.show()
+        ProgressDialogUtil.showProgress(activity , msg)
     }
 
     /**
      * 隐藏加载条
      */
     override fun hideProgress() {
-        if (mPregress.isShowing) {
-            mPregress.dismiss()
-        }
+        ProgressDialogUtil.dissmiss()
     }
 
     /**

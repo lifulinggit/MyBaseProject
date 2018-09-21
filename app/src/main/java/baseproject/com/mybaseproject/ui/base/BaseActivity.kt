@@ -1,6 +1,5 @@
 package baseproject.com.mybaseproject.ui.base
 
-import android.app.ProgressDialog
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
@@ -8,6 +7,7 @@ import android.view.View
 import baseproject.com.mybaseproject.R
 import baseproject.com.mybaseproject.mvp.contract.IContract
 import baseproject.com.mybaseproject.utils.ActivityUtils
+import baseproject.com.mybaseproject.utils.ProgressDialogUtil
 import baseproject.com.mybaseproject.utils.ToastUtils
 import com.noober.background.BackgroundLibrary
 import com.tbruyelle.rxpermissions2.RxPermissions
@@ -17,8 +17,6 @@ import kotlinx.android.synthetic.main.toolbar_base.view.*
 
 abstract class BaseActivity : AppCompatActivity(), IContract.IBaseView{
 
-
-    open lateinit var mPregress : ProgressDialog
     open var mActivity : AppCompatActivity? = null
     open lateinit var rxPermissions : RxPermissions
 
@@ -32,7 +30,6 @@ abstract class BaseActivity : AppCompatActivity(), IContract.IBaseView{
         ActivityUtils.pushActivity(this)
 
         rxPermissions = RxPermissions(this)
-        mPregress = ProgressDialog(this)
 
         initToolBar()
     }
@@ -98,16 +95,14 @@ abstract class BaseActivity : AppCompatActivity(), IContract.IBaseView{
      * 显示加载条
      */
     override fun showProgress(msg: String) {
-        mPregress.show()
+      ProgressDialogUtil.showProgress(this , msg)
     }
 
     /**
      * 隐藏加载条
      */
     override fun hideProgress() {
-        if (mPregress.isShowing){
-            mPregress.dismiss()
-        }
+        ProgressDialogUtil.dissmiss()
     }
 
     override fun onDestroy() {
